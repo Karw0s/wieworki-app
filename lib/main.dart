@@ -11,11 +11,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
-          appBar: AppBar(
-            title: Text("Wiewórki Game"),
-          ),
-          body: Buttons(),
-        ));
+      appBar: AppBar(
+        title: Text("Wiewórki Game"),
+      ),
+      body: Buttons(),
+    ));
   }
 }
 
@@ -28,7 +28,7 @@ class Buttons extends StatelessWidget {
         children: [
           MaterialButton(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
             color: Colors.deepOrangeAccent,
             minWidth: 300,
             height: 100,
@@ -37,9 +37,9 @@ class Buttons extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => QuestionOrTaskView(
-                        appearance: new ScreenAppearance(
-                            "Gromada", Colors.deepOrangeAccent),
-                      )));
+                            appearance: new ScreenAppearance(
+                                "Gromada", Colors.deepOrangeAccent),
+                          )));
             },
             child: Text(
               "Kategoria 1\nGromada",
@@ -49,15 +49,15 @@ class Buttons extends StatelessWidget {
           ),
           MaterialButton(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
             onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => QuestionOrTaskView(
-                        appearance: new ScreenAppearance(
-                            "Szczep", Colors.green),
-                      )));
+                            appearance:
+                                new ScreenAppearance("Szczep", Colors.green),
+                          )));
             },
             child: Text(
               "Kategoria 2\nSzczep",
@@ -72,15 +72,15 @@ class Buttons extends StatelessWidget {
           ),
           MaterialButton(
             shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
             onPressed: () {
               Navigator.push(
                   context,
                   MaterialPageRoute(
                       builder: (context) => QuestionOrTaskView(
-                        appearance: new ScreenAppearance(
-                            "Hufiec", Colors.yellow),
-                      )));
+                            appearance:
+                                new ScreenAppearance("Hufiec", Colors.yellow),
+                          )));
             },
             child: Text(
               "Kategoria 3\nHufiec",
@@ -100,9 +100,9 @@ class Buttons extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => QuestionOrTaskView(
-                        appearance: new ScreenAppearance(
-                            "ZHP", Colors.indigoAccent),
-                      )));
+                            appearance: new ScreenAppearance(
+                                "ZHP", Colors.indigoAccent),
+                          )));
             },
             child: Text(
               "Kategoria 4\nZHP",
@@ -139,7 +139,14 @@ class QuestionOrTaskView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               MaterialButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Question(
+                                color: appearance.color,
+                              )));
+                },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
                     side: BorderSide(color: appearance.color, width: 5)),
@@ -154,7 +161,12 @@ class QuestionOrTaskView extends StatelessWidget {
               ),
               MaterialButton(
                 onPressed: () {
-                  Navigator.pop(context);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Task(
+                                color: appearance.color,
+                              )));
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(18),
@@ -174,11 +186,72 @@ class QuestionOrTaskView extends StatelessWidget {
   }
 }
 
+class Task extends StatelessWidget {
+  final Color color;
+
+  const Task({Key key, this.color}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Zadanie",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: color,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [Text("Task lorem ipsum")],
+        ),
+      ),
+    );
+  }
+}
+
+class Question extends StatelessWidget {
+  final Color color;
+
+  const Question({Key key, this.color}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          "Pytanie",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: color,
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Text("Pytanie"),
+            MaterialButton(
+              onPressed: () {},
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  side: BorderSide(color: color)),
+              child: Text("Odpowiedź"),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class Answer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Odpowiedz"),),
+      appBar: AppBar(
+        title: Text("Odpowiedz"),
+      ),
     );
   }
 }
