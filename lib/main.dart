@@ -1,8 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-
-import 'views/Categories.dart';
+import 'package:wiewiorki_app/views/WidgetSwitcher.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +15,7 @@ class MyApp extends StatelessWidget {
       appBar: AppBar(
         title: Text("Wiewórki Game"),
       ),
-      body: Categories(),
+      body: WidgetSwitcher(),
     ));
   }
 }

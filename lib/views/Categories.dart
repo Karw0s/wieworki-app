@@ -9,6 +9,8 @@ class Categories extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          Text("Wybierz kategorię"),
+
           MaterialButton(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
@@ -25,7 +27,7 @@ class Categories extends StatelessWidget {
                           )));
             },
             child: Text(
-              "Kategoria 1\nGromada",
+              "Gromada",
               style: TextStyle(fontSize: 24),
               textAlign: TextAlign.center,
             ),
@@ -43,7 +45,7 @@ class Categories extends StatelessWidget {
                           )));
             },
             child: Text(
-              "Kategoria 2\nSzczep",
+              "Szczep",
               style: TextStyle(
                 fontSize: 24,
               ),
@@ -66,7 +68,7 @@ class Categories extends StatelessWidget {
                           )));
             },
             child: Text(
-              "Kategoria 3\nHufiec",
+              "Hufiec",
               style: TextStyle(fontSize: 24),
               textAlign: TextAlign.center,
             ),
@@ -88,7 +90,7 @@ class Categories extends StatelessWidget {
                           )));
             },
             child: Text(
-              "Kategoria 4\nZHP",
+              "ZHP",
               style: TextStyle(fontSize: 24),
               textAlign: TextAlign.center,
             ),
