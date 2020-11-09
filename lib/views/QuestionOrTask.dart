@@ -10,6 +10,8 @@ class QuestionOrTaskView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var width = MediaQuery.of(context).size.width;
+
     return Scaffold(
         appBar: AppBar(
           title: Text(
@@ -18,55 +20,66 @@ class QuestionOrTaskView extends StatelessWidget {
           ),
           backgroundColor: appearance.color,
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              MaterialButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Question(
-                                color: appearance.color,
-                              )));
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                    side: BorderSide(color: appearance.color, width: 5)),
-                height: 250,
-                minWidth: 300,
-                child: Text(
-                  "Pytanie",
-                  style: TextStyle(fontSize: 40),
-                  textAlign: TextAlign.center,
-                ),
-                // color: Colors.indigoAccent,
-              ),
-              MaterialButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Task(
-                                color: appearance.color,
-                              )));
-                },
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                    side: BorderSide(color: appearance.color, width: 5)),
-                height: 250,
-                minWidth: 300,
-                child: Text(
-                  "Zadanie",
-                  style: TextStyle(fontSize: 40),
-                  textAlign: TextAlign.center,
-                ),
-                // color: Colors.indigoAccent,
-              )
-            ],
-          ),
-        ));
+        body: Center(child: getButtons(context, width)));
+  }
+
+  getButtons(BuildContext context, double width) {
+    var buttons = [
+      MaterialButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Question(
+                        color: appearance.color,
+                      )));
+        },
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            side: BorderSide(color: appearance.color, width: 5)),
+        height: 250,
+        minWidth: 300,
+        child: Text(
+          "Pytanie",
+          style: TextStyle(fontSize: 40),
+          textAlign: TextAlign.center,
+        ),
+        // color: Colors.indigoAccent,
+      ),
+      MaterialButton(
+        onPressed: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Task(
+                        color: appearance.color,
+                      )));
+        },
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            side: BorderSide(color: appearance.color, width: 5)),
+        height: 250,
+        minWidth: 300,
+        child: Text(
+          "Zadanie",
+          style: TextStyle(fontSize: 40),
+          textAlign: TextAlign.center,
+        ),
+        // color: Colors.indigoAccent,
+      )
+    ];
+
+    if (width < 800) {
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: buttons,
+      );
+    } else {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: buttons,
+      );
+    }
   }
 }
 

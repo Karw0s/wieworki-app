@@ -5,18 +5,25 @@ import 'QuestionOrTask.dart';
 class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var buttonWidth = screenWidth - 50;
+    var buttonHeight = 125.0;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Text("Wybierz kategorię"),
-
+          Text(
+            "Wybierz kategorię",
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 24),
+          ),
           MaterialButton(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
             color: Colors.deepOrangeAccent,
-            minWidth: 300,
-            height: 100,
+            minWidth: buttonWidth,
+            height: buttonHeight,
             onPressed: () {
               Navigator.push(
                   context,
@@ -52,8 +59,8 @@ class Categories extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             color: Colors.green,
-            minWidth: 300,
-            height: 100,
+            minWidth: buttonWidth,
+            height: buttonHeight,
           ),
           MaterialButton(
             shape:
@@ -73,8 +80,8 @@ class Categories extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             color: Colors.yellow,
-            minWidth: 300,
-            height: 100,
+            minWidth: buttonWidth,
+            height: buttonHeight,
           ),
           MaterialButton(
             shape: RoundedRectangleBorder(
@@ -95,8 +102,8 @@ class Categories extends StatelessWidget {
               textAlign: TextAlign.center,
             ),
             color: Colors.indigoAccent,
-            minWidth: 300,
-            height: 100,
+            minWidth: buttonWidth,
+            height: buttonHeight,
           ),
         ],
       ),
