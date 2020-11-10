@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wiewiorki_app/views/Hint.dart';
 
 class Question extends StatelessWidget {
   final Color color;
@@ -27,46 +26,86 @@ class Question extends StatelessWidget {
 
   getButtonsLayout(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
-    var screenHeight = MediaQuery.of(context).size.height;
-    var buttonWidth = screenWidth / 2 - 75;
-    var buttonHeight = screenHeight / 2 - 75;
+    double buttonTextSize;
+    double buttonWidth;
+    double buttonHeight;
+    if (screenWidth > 800) {
+      buttonTextSize = 32;
+      buttonWidth = 300;
+      buttonHeight = 150;
+    } else {
+      buttonTextSize = 20;
+      buttonWidth = 200;
+      buttonHeight = 100;
+    }
 
-    return [
-      Text("Pytanie"),
-      MaterialButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => Hint(
-                        text: "TEst",
-                        color: color,
-                      )));
-        },
-        minWidth: buttonWidth,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-            side: BorderSide(color: color)),
-        child: Text("Podpowiedź"),
+    var hintButton = MaterialButton(
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Podpowiedź"),
+                content: Text("Tekst podpowiedzi"),
+                actions: [
+                  FlatButton(
+                      child: Text("Zamknij"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      })
+                ],
+              );
+            });
+      },
+      minWidth: buttonWidth,
+      height: buttonHeight,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+          side: BorderSide(color: color, width: 5)),
+      child: Text(
+        "Podpowiedź",
+        style: TextStyle(fontSize: buttonTextSize),
+        textAlign: TextAlign.center,
       ),
-      MaterialButton(
-        onPressed: () {},
-        minWidth: buttonWidth,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-            side: BorderSide(color: color)),
-        child: Text("Odpowiedź"),
+    );
+    var answerButton = MaterialButton(
+      onPressed: () {},
+      minWidth: buttonWidth,
+      height: buttonHeight,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+          side: BorderSide(color: color, width: 5)),
+      child: Text(
+        "Odpowiedź",
+        style: TextStyle(fontSize: buttonTextSize),
+        textAlign: TextAlign.center,
       ),
-      MaterialButton(
-        onPressed: () {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        },
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-            side: BorderSide(color: Colors.red)),
-        child: Text("Powrót"),
-      )
-    ];
+    );
+    var backButton = MaterialButton(
+      onPressed: () {
+        Navigator.pop(context);
+        Navigator.pop(context);
+      },
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(18),
+          side: BorderSide(color: Colors.red)),
+      child: Text("Powrót"),
+    );
+    List<Widget> content = List();
+    content.add(Text("Pytanie"));
+
+    if (screenWidth < 800) {
+      content.add(answerButton);
+      content.add(hintButton);
+      content.add(backButton);
+    } else {
+      content.add(Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [hintButton, answerButton],
+      ));
+      content.add(backButton);
+    }
+
+    return content;
   }
 }
