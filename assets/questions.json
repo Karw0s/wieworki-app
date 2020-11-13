@@ -1,0 +1,24 @@
+[
+  {
+    "number": 1,
+    "content": "Pytenie pierwsze",
+    "hint": "Podpoweidź do pytania pierwszego",
+    "category": "GROMADA",
+    "answer": {
+      "type": "SIMPLE",
+      "imageName": null,
+      "content": "Odpowiedź pytanie pierwsze"
+    }
+  },
+  {
+    "number": 2,
+    "content": "Pytenie drugie",
+    "hint": "Podpoweidź do pytania drugiego",
+    "category": "GROMADA",
+    "answer": {
+      "type": "SIMPLE",
+      "imageName": null,
+      "content": "Odpowiedź pytanie drugie"
+    }
+  }
+]

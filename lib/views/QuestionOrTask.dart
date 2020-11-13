@@ -30,7 +30,7 @@ class QuestionOrTaskView extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Question(
+                  builder: (context) => QuestionScreen(
                         color: appearance.color,
                       )));
         },
