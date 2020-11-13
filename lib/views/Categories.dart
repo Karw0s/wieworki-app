@@ -68,17 +68,18 @@ class Categories extends StatelessWidget {
 
   MaterialButton getZHPButton(
       BuildContext context, double buttonWidth, double buttonHeight) {
+    var color = Colors.indigoAccent;
     return MaterialButton(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(18),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      color: color,
+      minWidth: buttonWidth,
+      height: buttonHeight,
       onPressed: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => QuestionOrTaskView(
-                      appearance:
-                          new ScreenAppearance("ZHP", Colors.indigoAccent),
+                      appearance: new ScreenAppearance("ZHP", color),
                     )));
       },
       child: Text(
@@ -86,22 +87,23 @@ class Categories extends StatelessWidget {
         style: TextStyle(fontSize: 24),
         textAlign: TextAlign.center,
       ),
-      color: Colors.indigoAccent,
-      minWidth: buttonWidth,
-      height: buttonHeight,
     );
   }
 
   MaterialButton getHufiecButton(
       BuildContext context, double buttonWidth, double buttonHeight) {
+    var color = Colors.yellow;
     return MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      color: color,
+      minWidth: buttonWidth,
+      height: buttonHeight,
       onPressed: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => QuestionOrTaskView(
-                      appearance: new ScreenAppearance("Hufiec", Colors.yellow),
+                      appearance: new ScreenAppearance("Hufiec", color),
                     )));
       },
       child: Text(
@@ -109,22 +111,23 @@ class Categories extends StatelessWidget {
         style: TextStyle(fontSize: 24),
         textAlign: TextAlign.center,
       ),
-      color: Colors.yellow,
-      minWidth: buttonWidth,
-      height: buttonHeight,
     );
   }
 
   MaterialButton getSzczepButton(
       BuildContext context, double buttonWidth, double buttonHeight) {
+    var color = Colors.green;
     return MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+      color: color,
+      minWidth: buttonWidth,
+      height: buttonHeight,
       onPressed: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => QuestionOrTaskView(
-                      appearance: new ScreenAppearance("Szczep", Colors.green),
+                      appearance: new ScreenAppearance("Szczep", color),
                     )));
       },
       child: Text(
@@ -134,17 +137,15 @@ class Categories extends StatelessWidget {
         ),
         textAlign: TextAlign.center,
       ),
-      color: Colors.green,
-      minWidth: buttonWidth,
-      height: buttonHeight,
     );
   }
 
   MaterialButton getGromadaButton(
       BuildContext context, double buttonWidth, double buttonHeight) {
+    var color = Colors.deepOrangeAccent;
     return MaterialButton(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-      color: Colors.deepOrangeAccent,
+      color: color,
       minWidth: buttonWidth,
       height: buttonHeight,
       onPressed: () {
@@ -152,8 +153,7 @@ class Categories extends StatelessWidget {
             context,
             MaterialPageRoute(
                 builder: (context) => QuestionOrTaskView(
-                      appearance: new ScreenAppearance(
-                          "Gromada", Colors.deepOrangeAccent),
+                      appearance: new ScreenAppearance("Gromada", color),
                     )));
       },
       child: Text(
