@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:wiewiorki_app/views/Categories.dart';
 
@@ -18,12 +16,4 @@ class MyApp extends StatelessWidget {
       body: Categories(),
     ));
   }
-}
-
-class ButtonDetails {
-  final String text;
-  final Color color;
-  final Function;
-
-  ButtonDetails(this.Function, this.text, this.color);
 }
