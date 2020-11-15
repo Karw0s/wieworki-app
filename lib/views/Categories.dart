@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:wiewiorki_app/models/Category.dart';
 import 'package:wiewiorki_app/models/Question.dart';
+import 'package:wiewiorki_app/models/Task.dart';
 
 import 'QuestionOrTask.dart';
 
 class Categories extends StatefulWidget {
-  final Question question;
+  final List<Question> question;
+  final List<Task> tasks;
 
-  Categories(this.question);
+  Categories(this.question, this.tasks);
 
   @override
-  CategoriesState createState() => CategoriesState(question);
+  CategoriesState createState() => CategoriesState(question, tasks);
 }
 
 class CategoriesState extends State<Categories> {
   Category currentCategory;
-  Question question;
+  List<Question> questions;
+  List<Task> tasks;
 
-  CategoriesState(this.question);
+  CategoriesState(this.questions, this.tasks);
 
   @override
   Widget build(BuildContext context) {

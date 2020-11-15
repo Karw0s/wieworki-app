@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 
+import 'Categories.dart';
+
 class TaskScreen extends StatelessWidget {
   final Color color;
+  final CategoriesState parentState;
 
-  const TaskScreen({Key key, this.color}) : super(key: key);
+  const TaskScreen({Key key, this.color, this.parentState}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,9 @@ class TaskScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [Text("Task lorem ipsum")],
+          children: [
+            Text(parentState.tasks[0].content)
+          ],
         ),
       ),
     );

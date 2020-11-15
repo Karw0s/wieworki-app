@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:wiewiorki_app/models/Question.dart';
@@ -14,7 +16,7 @@ class QuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print(parentState.questions.where((element) => element.category == parentState.currentCategory).toList());
-
+    var question = drawQuestion(parentState);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -26,7 +28,7 @@ class QuestionScreen extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: getButtonsLayout(context, parentState.question),
+          children: getButtonsLayout(context, question),
         ),
       ),
     );
@@ -61,7 +63,7 @@ class QuestionScreen extends StatelessWidget {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text("Podpowiedź"),
-                content: Text("Tekst podpowiedzi"),
+                content: Text(question.hint),
                 actions: [
                   FlatButton(
                       child: Text("Zamknij"),
@@ -84,7 +86,23 @@ class QuestionScreen extends StatelessWidget {
       ),
     );
     var answerButton = MaterialButton(
-      onPressed: () {},
+      onPressed: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text("Odpowiedź"),
+                content: Text(question.answer.content),
+                actions: [
+                  FlatButton(
+                      child: Text("Zamknij"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      })
+                ],
+              );
+            });
+      },
       minWidth: buttonWidth,
       height: buttonHeight,
       shape: RoundedRectangleBorder(
@@ -128,5 +146,11 @@ class QuestionScreen extends StatelessWidget {
 
   Future<String> getFileData(String path) async {
     return await rootBundle.loadString(path);
+  }
+
+  Question drawQuestion(CategoriesState parentState) {
+    var rnd = new Random();
+    var questionInCategory = parentState.questions.where((element) => element.category == parentState.currentCategory);
+    return questionInCategory.elementAt(rnd.nextInt(questionInCategory.length));
   }
 }

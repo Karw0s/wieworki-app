@@ -3,7 +3,7 @@
     {
       "id": 0,
       "content": "Treść pytania drugiego o Gromadę",
-      "hint": "Podpoweidź do pytania pierwszego",
+      "hint": "Podpowiedź do pytania pierwszego",
       "category": "GROMADA",
       "answer": {
         "type": "SIMPLE",
@@ -14,7 +14,7 @@
     {
       "id": 1,
       "content": "Pytenie drugie, które jest o szczepie",
-      "hint": "Podpoweidź do pytania drugiego",
+      "hint": "Podpowiedź do pytania drugiego",
       "category": "SZCZEP",
       "answer": {
         "type": "WITH_IMAGE",
@@ -42,6 +42,28 @@
         "type": "SIMPLE",
         "imageName": null,
         "content": "Związek Harcerstwa Polskiego"
+      }
+    },
+    {
+      "id": 4,
+      "content": "Najwspanialszy druh",
+      "hint": "Już go niestety nie ma",
+      "category": "GROMADA",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Michaś"
+      }
+    },
+    {
+      "id": 5,
+      "content": "Najwspanialsza druhna?",
+      "hint": "Jej imię zaczyna się na literę P.",
+      "category": "GROMADA",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Patek"
       }
     }
   ],
