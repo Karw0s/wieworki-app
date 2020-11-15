@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:html';
 
 import 'package:flutter/material.dart';
 import 'package:wiewiorki_app/models/Task.dart';
@@ -30,9 +31,10 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Wiewiórki Game",
         home: Scaffold(
             appBar: AppBar(
-              title: Text("Wiewórki Game"),
+              title: Text("Wiewiórki Game"),
             ),
             body: FutureBuilder(
                 future: Future.wait([questions, tasks]),
