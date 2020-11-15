@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:wiewiorki_app/models/Task.dart';
 import 'package:wiewiorki_app/views/Categories.dart';
-import 'package:http/http.dart' as http;
 
 import 'models/Question.dart';
 
@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: "Wiewiórki Game",
+        title: "Wiewiórki Game",
         home: Scaffold(
             appBar: AppBar(
               title: Text("Wiewiórki Game"),
@@ -55,7 +55,7 @@ Future<List<Question>> fetchQuestion() async {
     // If the server did return a 200 OK response,
     // then parse the JSON.
     final parsed = jsonDecode(response.body) as List;
-    return parsed.map<Question>((json)=> Question.fromJson(json)).toList();
+    return parsed.map<Question>((json) => Question.fromJson(json)).toList();
   } else {
     // If the server did not return a 200 OK response,
     // then throw an exception.

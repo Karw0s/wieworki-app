@@ -6,7 +6,7 @@ import 'package:wiewiorki_app/models/Question.dart';
 
 import 'Categories.dart';
 
-class QuestionScreen extends StatelessWidget {
+class QuestionScreen extends StatefulWidget {
   final Color color;
   final CategoriesState parentState;
 
@@ -14,16 +14,35 @@ class QuestionScreen extends StatelessWidget {
       : super(key: key);
 
   @override
+  _QuestionScreenState createState() => _QuestionScreenState();
+}
+
+class _QuestionScreenState extends State<QuestionScreen> {
+
+  Question question;
+
+  @override
+  void initState() {
+    super.initState();
+    question = drawQuestion(widget.parentState);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    // todo: add current question to asked questions list
+  }
+
+  @override
   Widget build(BuildContext context) {
     // print(parentState.questions.where((element) => element.category == parentState.currentCategory).toList());
-    var question = drawQuestion(parentState);
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "Pytanie",
           style: TextStyle(color: Colors.black),
         ),
-        backgroundColor: color,
+        backgroundColor: widget.color,
       ),
       body: Center(
         child: Column(
@@ -78,7 +97,7 @@ class QuestionScreen extends StatelessWidget {
       height: buttonHeight,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
-          side: BorderSide(color: color, width: 5)),
+          side: BorderSide(color: widget.color, width: 5)),
       child: Text(
         "Podpowiedź",
         style: TextStyle(fontSize: buttonTextSize),
@@ -107,7 +126,7 @@ class QuestionScreen extends StatelessWidget {
       height: buttonHeight,
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
-          side: BorderSide(color: color, width: 5)),
+          side: BorderSide(color: widget.color, width: 5)),
       child: Text(
         "Odpowiedź",
         style: TextStyle(fontSize: buttonTextSize),
