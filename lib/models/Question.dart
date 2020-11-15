@@ -1,4 +1,5 @@
 import 'Answer.dart';
+import 'Category.dart';
 
 class Question {
   int id;
@@ -17,15 +18,4 @@ class Question {
         answer = Answer.fromJson(json["answer"]);
 }
 
-getCategoryFromString(String c) {
-  for(Category category in Category.values) {
-    if (category.toString().split('.')[1].toUpperCase() == c) {
-      return category;
-    }
-  }
-  return null;
-}
 
-enum Category {
-  GROMADA, SZCZEP, HUFIEC, ZHP
-}

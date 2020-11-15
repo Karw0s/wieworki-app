@@ -44,7 +44,7 @@ class _MyAppState extends State<MyApp> {
 
 Future<Question> fetchQuestion() async {
   final response =
-      await http.get('https://wiewiorki-f1db5.firebaseio.com/0.json');
+      await http.get('https://wiewiorki-f1db5.firebaseio.com/questions/0.json');
 
   if (response.statusCode == 200) {
     // If the server did return a 200 OK response,
