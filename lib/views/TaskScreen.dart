@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Task extends StatelessWidget {
+class TaskScreen extends StatelessWidget {
   final Color color;
 
-  const Task({Key key, this.color}) : super(key: key);
+  const TaskScreen({Key key, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

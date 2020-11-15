@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:wiewiorki_app/models/Question.dart';
 
 import 'QuestionOrTask.dart';
 
-class Categories extends StatelessWidget {
+class Categories extends StatefulWidget {
+  final Question question;
+
+  Categories(this.question);
+
+  @override
+  CategoriesState createState() => CategoriesState(question);
+}
+
+class CategoriesState extends State<Categories> {
+  Category currentCategory;
+  Question question;
+
+  CategoriesState(this.question);
+
   @override
   Widget build(BuildContext context) {
     var screenWidth = MediaQuery.of(context).size.width;
@@ -75,11 +90,15 @@ class Categories extends StatelessWidget {
       minWidth: buttonWidth,
       height: buttonHeight,
       onPressed: () {
+        setState(() {
+          currentCategory = Category.ZHP;
+        });
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => QuestionOrTaskView(
                       appearance: new ScreenAppearance("ZHP", color),
+                      parentSate: this,
                     )));
       },
       child: Text(
@@ -99,11 +118,15 @@ class Categories extends StatelessWidget {
       minWidth: buttonWidth,
       height: buttonHeight,
       onPressed: () {
+        setState(() {
+          currentCategory = Category.HUFIEC;
+        });
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => QuestionOrTaskView(
                       appearance: new ScreenAppearance("Hufiec", color),
+                      parentSate: this,
                     )));
       },
       child: Text(
@@ -123,11 +146,15 @@ class Categories extends StatelessWidget {
       minWidth: buttonWidth,
       height: buttonHeight,
       onPressed: () {
+        setState(() {
+          currentCategory = Category.SZCZEP;
+        });
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => QuestionOrTaskView(
                       appearance: new ScreenAppearance("Szczep", color),
+                      parentSate: this,
                     )));
       },
       child: Text(
@@ -149,11 +176,15 @@ class Categories extends StatelessWidget {
       minWidth: buttonWidth,
       height: buttonHeight,
       onPressed: () {
+        setState(() {
+          currentCategory = Category.GROMADA;
+        });
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => QuestionOrTaskView(
                       appearance: new ScreenAppearance("Gromada", color),
+                      parentSate: this,
                     )));
       },
       child: Text(

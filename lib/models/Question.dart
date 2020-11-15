@@ -1,20 +1,31 @@
 import 'Answer.dart';
 
 class Question {
-  int number;
+  int id;
   String content;
   String hint;
   Answer answer;
   Category category;
 
-  Question(this.number, this.content, this.hint, this.answer, this.category);
+  Question({this.id, this.content, this.hint, this.answer, this.category});
 
   Question.fromJson(Map<String, dynamic> json)
-      : number = json["number"],
+      : id = json["id"],
         content = json["content"],
         hint = json["hint"],
-        answer = Answer.fromJson(json["answer"]),
-        category = json["category"];
+        category = getCategoryFromString(json["category"]),
+        answer = Answer.fromJson(json["answer"]);
 }
 
-enum Category { GROMADA, SZCZEP, HUFIEC, ZHP }
+getCategoryFromString(String c) {
+  for(Category category in Category.values) {
+    if (category.toString().split('.')[1].toUpperCase() == c) {
+      return category;
+    }
+  }
+  return null;
+}
+
+enum Category {
+  GROMADA, SZCZEP, HUFIEC, ZHP
+}
