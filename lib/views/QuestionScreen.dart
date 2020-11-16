@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:wiewiorki_app/models/Question.dart';
 
 import 'Categories.dart';
@@ -18,37 +17,108 @@ class QuestionScreen extends StatefulWidget {
 }
 
 class _QuestionScreenState extends State<QuestionScreen> {
-
   Question question;
+  bool isOutOfQuestions;
 
   @override
   void initState() {
     super.initState();
+    isOutOfQuestions = false;
     question = drawQuestion(widget.parentState);
   }
 
   @override
-  void dispose() {
-    super.dispose();
-    // todo: add current question to asked questions list
+  void deactivate() {
+    widget.parentState.setState(() {
+      if (isOutOfQuestions) {
+        var list = widget.parentState.questions
+            .where((e) => e.category == widget.parentState.currentCategory)
+            .map((e) => e.id)
+            .toList();
+        widget.parentState.askedQuestions
+            .removeWhere((id) => list.contains(id));
+      }
+      widget.parentState.askedQuestions.add(question.id);
+    });
+    super.deactivate();
   }
 
   @override
   Widget build(BuildContext context) {
     // print(parentState.questions.where((element) => element.category == parentState.currentCategory).toList());
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Pytanie",
-          style: TextStyle(color: Colors.black),
+        appBar: AppBar(
+          title: Text(
+            "Pytanie",
+            style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: widget.color,
         ),
-        backgroundColor: widget.color,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: getButtonsLayout(context, question),
-        ),
+        body: new QuestionScreenBody(
+          outOfQuestions: isOutOfQuestions,
+          question: question,
+          color: widget.color,
+        ));
+  }
+
+  Question drawQuestion(CategoriesState parentState) {
+    var rnd = new Random();
+    var questionsInCategory = parentState.questions
+        .where((element) => element.category == parentState.currentCategory)
+        .toList();
+    var questionsAvailable = questionsInCategory
+        .where((element) =>
+            !widget.parentState.askedQuestions.contains(element.id))
+        .toList();
+    if (questionsAvailable.isEmpty) {
+      isOutOfQuestions = true;
+      print(isOutOfQuestions);
+      questionsAvailable = questionsInCategory;
+    }
+    return questionsAvailable.elementAt(rnd.nextInt(questionsAvailable.length));
+  }
+}
+
+class QuestionScreenBody extends StatefulWidget {
+  final bool outOfQuestions;
+  final Question question;
+  final Color color;
+
+  const QuestionScreenBody(
+      {Key key, this.outOfQuestions, this.question, this.color})
+      : super(key: key);
+
+  @override
+  _QuestionScreenBodyState createState() =>
+      _QuestionScreenBodyState(outOfQuestions, question);
+}
+
+class _QuestionScreenBodyState extends State<QuestionScreenBody> {
+  final bool outOfQuestions;
+  final Question question;
+  String _outOfQuestionsMessage =
+      "Już znasz wszyskie pytania z tej kategorii. Pytania od tej pory będą się powtarzać!";
+
+  _QuestionScreenBodyState(this.outOfQuestions, this.question);
+
+  @override
+  void initState() {
+    if (outOfQuestions) {
+      new Future<Null>.delayed(Duration.zero, () {
+        Scaffold.of(context).showSnackBar(
+          new SnackBar(content: new Text(_outOfQuestionsMessage)),
+        );
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: getButtonsLayout(context, question),
       ),
     );
   }
@@ -61,21 +131,42 @@ class _QuestionScreenState extends State<QuestionScreen> {
     double backWidth;
     double backHeight;
     String text = question.content;
-    if (screenWidth > 800) {
-      buttonTextSize = 32;
-      buttonWidth = 250;
-      buttonHeight = 125;
-      backWidth = 100.0;
-      backHeight = 50;
-    } else {
+    List<Widget> content = List();
+
+    content.add(Text(text));
+
+    if (screenWidth < 800) {
       buttonTextSize = 20;
       buttonWidth = 150;
       buttonHeight = 75;
       backWidth = 88.0;
       backHeight = 36;
-    }
 
-    var hintButton = MaterialButton(
+      content.add(getAnswerButton(buttonWidth, buttonHeight, buttonTextSize));
+      content.add(getHintButton(buttonWidth, buttonHeight, buttonTextSize));
+      content.add(getBackButton(backWidth, backHeight));
+    } else {
+      buttonTextSize = 32;
+      buttonWidth = 250;
+      buttonHeight = 125;
+      backWidth = 100.0;
+      backHeight = 50;
+
+      content.add(Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          getHintButton(buttonWidth, buttonHeight, buttonTextSize),
+          getAnswerButton(buttonWidth, buttonHeight, buttonTextSize)
+        ],
+      ));
+      content.add(getBackButton(backWidth, backHeight));
+    }
+    return content;
+  }
+
+  getHintButton(
+      double buttonWidth, double buttonHeight, double buttonTextSize) {
+    return MaterialButton(
       onPressed: () {
         showDialog(
             context: context,
@@ -104,7 +195,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
         textAlign: TextAlign.center,
       ),
     );
-    var answerButton = MaterialButton(
+  }
+
+  getAnswerButton(
+      double buttonWidth, double buttonHeight, double buttonTextSize) {
+    return MaterialButton(
       onPressed: () {
         showDialog(
             context: context,
@@ -133,7 +228,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
         textAlign: TextAlign.center,
       ),
     );
-    var backButton = MaterialButton(
+  }
+
+  getBackButton(double backWidth, double backHeight) {
+    return MaterialButton(
       onPressed: () {
         Navigator.pop(context);
         Navigator.pop(context);
@@ -145,31 +243,5 @@ class _QuestionScreenState extends State<QuestionScreen> {
           side: BorderSide(color: Colors.red)),
       child: Text("Powrót"),
     );
-    List<Widget> content = List();
-    content.add(Text(text));
-
-    if (screenWidth < 800) {
-      content.add(answerButton);
-      content.add(hintButton);
-      content.add(backButton);
-    } else {
-      content.add(Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [hintButton, answerButton],
-      ));
-      content.add(backButton);
-    }
-
-    return content;
-  }
-
-  Future<String> getFileData(String path) async {
-    return await rootBundle.loadString(path);
-  }
-
-  Question drawQuestion(CategoriesState parentState) {
-    var rnd = new Random();
-    var questionInCategory = parentState.questions.where((element) => element.category == parentState.currentCategory);
-    return questionInCategory.elementAt(rnd.nextInt(questionInCategory.length));
   }
 }
