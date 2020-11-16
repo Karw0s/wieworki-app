@@ -19,6 +19,16 @@ class CategoriesState extends State<Categories> {
   Category currentCategory;
   List<Question> questions;
   List<Task> tasks;
+  List<int> askedQuestions;
+  List<int> askedTasks;
+
+
+  @override
+  void initState() {
+    super.initState();
+    askedQuestions = new List();
+    askedTasks = new List();
+  }
 
   CategoriesState(this.questions, this.tasks);
 
