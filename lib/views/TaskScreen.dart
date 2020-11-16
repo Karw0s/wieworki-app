@@ -46,28 +46,17 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Zadanie",
-          style: TextStyle(color: Colors.black),
+        appBar: AppBar(
+          title: Text(
+            "Zadanie",
+            style: TextStyle(color: Colors.black),
+          ),
+          backgroundColor: widget.color,
         ),
-        backgroundColor: widget.color,
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: outOfTasks
-              ? [
-                  Text(
-                    "Już znasz wszyskie zadania z tej kategorii. Wszyskie zadania w tej kategorii wracają do póli.",
-                    style: TextStyle(color: Colors.redAccent),
-                  ),
-                  Text(task.content)
-                ]
-              : [Text(task.content)],
-        ),
-      ),
-    );
+        body: new TaskScreenBody(
+          task: task,
+          outOfTasks: outOfTasks,
+        ));
   }
 
   Task drawTask(List<Task> tasks) {
@@ -84,5 +73,46 @@ class _TaskScreenState extends State<TaskScreen> {
       tasksAvailable = taskInCategory;
     }
     return tasksAvailable.elementAt(rnd.nextInt(tasksAvailable.length));
+  }
+}
+
+class TaskScreenBody extends StatefulWidget {
+  final bool outOfTasks;
+  final Task task;
+
+  const TaskScreenBody({Key key, this.task, this.outOfTasks}) : super(key: key);
+
+  @override
+  _TaskScreenBodyState createState() => _TaskScreenBodyState(task, outOfTasks);
+}
+
+class _TaskScreenBodyState extends State<TaskScreenBody> {
+  final Task task;
+  final bool outOfTasks;
+  String _outOfTasksMessage =
+      "Już znasz wszyskie zadania z tej kategorii. Wszyskie zadania w tej kategorii wracają do póli.";
+
+  _TaskScreenBodyState(this.task, this.outOfTasks);
+
+  @override
+  void initState() {
+    if (outOfTasks) {
+      new Future<Null>.delayed(Duration.zero, () {
+        Scaffold.of(context).showSnackBar(
+          new SnackBar(content: new Text(_outOfTasksMessage)),
+        );
+      });
+    }
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [Text(task.content)],
+      ),
+    );
   }
 }
