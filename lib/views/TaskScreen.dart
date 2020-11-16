@@ -35,7 +35,6 @@ class _TaskScreenState extends State<TaskScreen> {
                 element.category == widget.parentState.currentCategory)
             .map((e) => e.id)
             .toList();
-
         widget.parentState.askedTasks.removeWhere((id) => list.contains(id));
       }
       widget.parentState.askedTasks.add(task.id);
@@ -90,7 +89,7 @@ class _TaskScreenBodyState extends State<TaskScreenBody> {
   final Task task;
   final bool outOfTasks;
   String _outOfTasksMessage =
-      "Już znasz wszyskie zadania z tej kategorii. Wszyskie zadania w tej kategorii wracają do póli.";
+      "Już znasz wszyskie zadania z tej kategorii. Od tej pory zadania będą się powtarzać.";
 
   _TaskScreenBodyState(this.task, this.outOfTasks);
 
@@ -99,7 +98,10 @@ class _TaskScreenBodyState extends State<TaskScreenBody> {
     if (outOfTasks) {
       new Future<Null>.delayed(Duration.zero, () {
         Scaffold.of(context).showSnackBar(
-          new SnackBar(content: new Text(_outOfTasksMessage)),
+          new SnackBar(
+            content: new Text(_outOfTasksMessage),
+            duration: Duration(seconds: 5),
+          ),
         );
       });
     }

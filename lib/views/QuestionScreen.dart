@@ -106,7 +106,10 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
     if (outOfQuestions) {
       new Future<Null>.delayed(Duration.zero, () {
         Scaffold.of(context).showSnackBar(
-          new SnackBar(content: new Text(_outOfQuestionsMessage)),
+          new SnackBar(
+            content: new Text(_outOfQuestionsMessage),
+            duration: Duration(seconds: 5),
+          ),
         );
       });
     }
@@ -130,10 +133,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
     double buttonHeight;
     double backWidth;
     double backHeight;
-    String text = question.content;
     List<Widget> content = List();
-
-    content.add(Text(text));
 
     if (screenWidth < 800) {
       buttonTextSize = 20;
@@ -142,16 +142,26 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       backWidth = 88.0;
       backHeight = 36;
 
+      content.add(Text(
+        question.content,
+        style: TextStyle(fontSize: 36),
+        textAlign: TextAlign.center,
+      ));
       content.add(getAnswerButton(buttonWidth, buttonHeight, buttonTextSize));
       content.add(getHintButton(buttonWidth, buttonHeight, buttonTextSize));
       content.add(getBackButton(backWidth, backHeight));
     } else {
-      buttonTextSize = 32;
-      buttonWidth = 250;
-      buttonHeight = 125;
+      buttonTextSize = 26;
+      buttonWidth = 200;
+      buttonHeight = 100;
       backWidth = 100.0;
-      backHeight = 50;
+      backHeight = 75;
 
+      content.add(Text(
+        question.content,
+        style: TextStyle(fontSize: 42),
+        textAlign: TextAlign.center,
+      ));
       content.add(Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -241,7 +251,10 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
           side: BorderSide(color: Colors.red)),
-      child: Text("Powrót"),
+      child: Text(
+        "Powrót",
+        style: TextStyle(fontSize: 20),
+      ),
     );
   }
 }
