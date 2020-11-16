@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
-import 'Question.dart';
-import 'Task.dart';
+import 'QuestionScreen.dart';
+import 'Categories.dart';
+import 'TaskScreen.dart';
 
 class QuestionOrTaskView extends StatelessWidget {
   final ScreenAppearance appearance;
+  final CategoriesState parentSate;
 
-  const QuestionOrTaskView({Key key, this.appearance}) : super(key: key);
+  const QuestionOrTaskView({Key key, this.appearance, this.parentSate})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +33,9 @@ class QuestionOrTaskView extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Question(
+                  builder: (context) => QuestionScreen(
                         color: appearance.color,
+                        parentState: parentSate,
                       )));
         },
         shape: RoundedRectangleBorder(
@@ -51,8 +55,9 @@ class QuestionOrTaskView extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => Task(
+                  builder: (context) => TaskScreen(
                         color: appearance.color,
+                        parentState: parentSate,
                       )));
         },
         shape: RoundedRectangleBorder(
