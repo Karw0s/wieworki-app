@@ -31,19 +31,37 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: "Wiewiórki Game",
-        home: Scaffold(
-            appBar: AppBar(
-              title: Text("Wiewiórki Game"),
+      title: "Wiewiórki Game",
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text("Wiewiórki Game"),
+        ),
+        body: FutureBuilder(
+          future: Future.wait([questions, tasks]),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) print(snapshot.error);
+            return snapshot.hasData
+                ? Categories(snapshot.data[0], snapshot.data[1])
+                : Center(child: CircularProgressIndicator());
+          },
+        ),
+        bottomNavigationBar: BottomAppBar(
+          child: Container(
+            color: Colors.transparent,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.copyright_sharp,
+                  size: 14,
+                ),
+                Text("2020 Created by Michał Karwowski")
+              ],
             ),
-            body: FutureBuilder(
-                future: Future.wait([questions, tasks]),
-                builder: (context, snapshot) {
-                  if (snapshot.hasError) print(snapshot.error);
-                  return snapshot.hasData
-                      ? Categories(snapshot.data[0], snapshot.data[1])
-                      : Center(child: CircularProgressIndicator());
-                })));
+          ),
+        ),
+      ),
+    );
   }
 }
 

@@ -1,6 +1,8 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:wiewiorki_app/models/Answer.dart';
 import 'package:wiewiorki_app/models/Question.dart';
 
 import 'Categories.dart';
@@ -216,7 +218,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text("Odpowiedź"),
-                content: Text(question.answer.content),
+                content: getDialogContent(widget.question.answer),
                 actions: [
                   FlatButton(
                       child: Text("Zamknij"),
@@ -240,21 +242,60 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
     );
   }
 
+  getDialogContent(Answer answer) {
+    print(answer);
+    var _imageName = answer.imageName;
+    if (answer.imageName == null) {
+      return Text(answer.content);
+    } else {
+      return Center(
+        heightFactor: 1,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Row(
+              children: [
+                Text(answer.content),
+              ],
+            ),
+            Row(
+              children: [Text("")],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CachedNetworkImage(
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  imageUrl:
+                      'https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/$_imageName?alt=media',
+                )
+                // .network(
+                // "https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/przystojny-romek.jpg?alt=media",
+                // fit: BoxFit.cover,)
+              ],
+            )
+          ],
+        ),
+      );
+    }
+  }
+
   getBackButton(double backWidth, double backHeight) {
     return MaterialButton(
       onPressed: () {
         Navigator.pop(context);
         Navigator.pop(context);
       },
-      minWidth: backWidth,
-      height: backHeight,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-          side: BorderSide(color: Colors.red)),
-      child: Text(
-        "Powrót",
-        style: TextStyle(fontSize: 20),
+      shape: CircleBorder(),
+      child: Icon(
+        Icons.home,
+        color: Colors.white,
+        size: 46,
       ),
+      splashColor: Colors.red,
+      color: widget.color,
+      padding: EdgeInsets.all(16),
     );
   }
 }
