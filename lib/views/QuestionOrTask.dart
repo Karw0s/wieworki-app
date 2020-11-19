@@ -43,6 +43,7 @@ class QuestionOrTaskView extends StatelessWidget {
             side: BorderSide(color: appearance.color, width: 5)),
         height: 250,
         minWidth: 300,
+        splashColor: appearance.color,
         child: Text(
           "Pytanie",
           style: TextStyle(fontSize: 40),
@@ -65,6 +66,7 @@ class QuestionOrTaskView extends StatelessWidget {
             side: BorderSide(color: appearance.color, width: 5)),
         height: 250,
         minWidth: 300,
+        splashColor: appearance.color,
         child: Text(
           "Zadanie",
           style: TextStyle(fontSize: 40),

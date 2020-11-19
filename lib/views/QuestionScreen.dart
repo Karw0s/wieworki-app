@@ -201,6 +201,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
           side: BorderSide(color: widget.color, width: 5)),
+      splashColor: widget.color,
       child: Text(
         "Podpowiedź",
         style: TextStyle(fontSize: buttonTextSize),
@@ -234,6 +235,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(18),
           side: BorderSide(color: widget.color, width: 5)),
+      splashColor: widget.color,
       child: Text(
         "Odpowiedź",
         style: TextStyle(fontSize: buttonTextSize),
