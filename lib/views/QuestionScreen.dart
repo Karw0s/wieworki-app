@@ -151,7 +151,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       ));
       content.add(getAnswerButton(buttonWidth, buttonHeight, buttonTextSize));
       content.add(getHintButton(buttonWidth, buttonHeight, buttonTextSize));
-      content.add(getBackButton(backWidth, backHeight));
+      content.add(getBackButton(backWidth, backHeight, 32));
     } else {
       buttonTextSize = 26;
       buttonWidth = 200;
@@ -171,7 +171,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
           getAnswerButton(buttonWidth, buttonHeight, buttonTextSize)
         ],
       ));
-      content.add(getBackButton(backWidth, backHeight));
+      content.add(getBackButton(backWidth, backHeight, 46));
     }
     return content;
   }
@@ -264,18 +264,11 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
             Row(
               children: [Text("")],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CachedNetworkImage(
-                  placeholder: (context, url) => CircularProgressIndicator(),
-                  imageUrl:
-                      'https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/$_imageName?alt=media',
-                )
-                // .network(
-                // "https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/przystojny-romek.jpg?alt=media",
-                // fit: BoxFit.cover,)
-              ],
+            CachedNetworkImage(
+              placeholder: (context, url) => CircularProgressIndicator(),
+              imageUrl:
+                  'https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/$_imageName?alt=media',
+              fit: BoxFit.cover,
             )
           ],
         ),
@@ -283,7 +276,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
     }
   }
 
-  getBackButton(double backWidth, double backHeight) {
+  getBackButton(double backWidth, double backHeight, double iconSize) {
     return MaterialButton(
       onPressed: () {
         Navigator.pop(context);
@@ -293,7 +286,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       child: Icon(
         Icons.home,
         color: Colors.white,
-        size: 46,
+        size: iconSize,
       ),
       splashColor: Colors.red,
       color: widget.color,
