@@ -1,9 +1,11 @@
 import 'dart:math';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:wiewiorki_app/models/Task.dart';
 
 import 'Categories.dart';
+import 'CommonElements.dart';
 
 class TaskScreen extends StatefulWidget {
   final Color color;
@@ -55,6 +57,7 @@ class _TaskScreenState extends State<TaskScreen> {
         body: new TaskScreenBody(
           task: task,
           outOfTasks: outOfTasks,
+          color: widget.color,
         ));
   }
 
@@ -78,8 +81,10 @@ class _TaskScreenState extends State<TaskScreen> {
 class TaskScreenBody extends StatefulWidget {
   final bool outOfTasks;
   final Task task;
+  final Color color;
 
-  const TaskScreenBody({Key key, this.task, this.outOfTasks}) : super(key: key);
+  const TaskScreenBody({Key key, this.task, this.outOfTasks, this.color})
+      : super(key: key);
 
   @override
   _TaskScreenBodyState createState() => _TaskScreenBodyState(task, outOfTasks);
@@ -100,7 +105,7 @@ class _TaskScreenBodyState extends State<TaskScreenBody> {
         Scaffold.of(context).showSnackBar(
           new SnackBar(
             content: new Text(_outOfTasksMessage),
-            duration: Duration(seconds: 5),
+            duration: Duration(seconds: 7),
           ),
         );
       });
@@ -113,8 +118,69 @@ class _TaskScreenBodyState extends State<TaskScreenBody> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [Text(task.content)],
+        children: getTaskLayout(context),
       ),
     );
+  }
+
+  getTaskLayout(BuildContext context) {
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+
+    if (screenWidth < 800) {
+      return getScreenLayout(SmallScreenButtons(), screenHeight);
+    } else {
+      return getScreenLayout(BigScreenButtons(), screenHeight);
+    }
+  }
+
+  getScreenLayout(CommonButtonCreator buttonCreator, double screenHeight) {
+    List<Widget> content = List();
+    content
+        .add(getTaskContent(task, buttonCreator.getTextSize(), screenHeight));
+    if (task.answer != null) {
+      content.add(
+          buttonCreator.getAnswerButton(context, widget.color, task.answer));
+    }
+    content.add(buttonCreator.getBackButton(context, widget.color));
+    return content;
+  }
+
+  getTaskContent(Task task, double textSize, double screenHeight) {
+    if (task.imageName == null) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+        child: Text(
+          task.content,
+          style: TextStyle(fontSize: textSize),
+          textAlign: TextAlign.center,
+        ),
+      );
+    } else {
+      var _imageName = task.imageName;
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+            child: Text(
+              task.content,
+              style: TextStyle(fontSize: textSize),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
+            height: screenHeight / 2 - 50,
+            child: CachedNetworkImage(
+              placeholder: (context, url) =>
+                  Center(child: CircularProgressIndicator()),
+              imageUrl:
+                  'https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/$_imageName?alt=media',
+              fit: BoxFit.scaleDown,
+            ),
+          ),
+        ],
+      );
+    }
   }
 }

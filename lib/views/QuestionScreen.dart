@@ -2,10 +2,10 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:wiewiorki_app/models/Answer.dart';
 import 'package:wiewiorki_app/models/Question.dart';
 
 import 'Categories.dart';
+import 'CommonElements.dart';
 
 class QuestionScreen extends StatefulWidget {
   final Color color;
@@ -109,7 +109,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
         Scaffold.of(context).showSnackBar(
           new SnackBar(
             content: new Text(_outOfQuestionsMessage),
-            duration: Duration(seconds: 5),
+            duration: Duration(seconds: 7),
           ),
         );
       });
@@ -138,40 +138,38 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
   getButtonsLayout(BuildContext context, Question question) {
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
-    double buttonTextSize;
-    double buttonWidth;
-    double buttonHeight;
-    double backWidth;
-    double backHeight;
     List<Widget> content = List();
+    CommonButtonCreator commonButtons;
 
     if (screenWidth < 800) {
-      buttonTextSize = 20;
-      buttonWidth = 150;
-      buttonHeight = 75;
-      backWidth = 88.0;
-      backHeight = 36;
-
-      content.add(getQuestionContent(question, 30, screenHeight));
-      content.add(getHintButton(buttonWidth, buttonHeight, buttonTextSize));
-      content.add(getAnswerButton(buttonWidth, buttonHeight, buttonTextSize));
-      content.add(getBackButton(backWidth, backHeight, 32));
+      commonButtons = SmallScreenButtons();
+      content.add(getQuestionContent(
+          question, commonButtons.getTextSize(), screenHeight));
+      content.add(getHintButton(
+          SmallScreenButtons.BUTTON_WIDTH,
+          SmallScreenButtons.BUTTON_HEIGHT,
+          SmallScreenButtons.BUTTON_TEXT_SIZE));
+      content.add(commonButtons.getAnswerButton(
+          context, widget.color, question.answer));
+      content.add(commonButtons.getBackButton(context, widget.color));
     } else {
-      buttonTextSize = 26;
-      buttonWidth = 200;
-      buttonHeight = 100;
-      backWidth = 100.0;
-      backHeight = 75;
-
-      content.add(getQuestionContent(question, 42, screenHeight));
-      content.add(Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          getHintButton(buttonWidth, buttonHeight, buttonTextSize),
-          getAnswerButton(buttonWidth, buttonHeight, buttonTextSize)
-        ],
-      ));
-      content.add(getBackButton(backWidth, backHeight, 46));
+      commonButtons = BigScreenButtons();
+      content.add(getQuestionContent(
+          question, commonButtons.getTextSize(), screenHeight));
+      content.add(
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            getHintButton(
+                BigScreenButtons.BUTTON_WIDTH,
+                BigScreenButtons.BUTTON_HEIGHT,
+                BigScreenButtons.BUTTON_TEXT_SIZE),
+            commonButtons.getAnswerButton(
+                context, widget.color, question.answer)
+          ],
+        ),
+      );
+      content.add(commonButtons.getBackButton(context, widget.color));
     }
     return content;
   }
@@ -247,101 +245,6 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
           style: TextStyle(fontSize: buttonTextSize),
           textAlign: TextAlign.center,
         ),
-      ),
-    );
-  }
-
-  getAnswerButton(
-      double buttonWidth, double buttonHeight, double buttonTextSize) {
-    return Padding(
-      padding: EdgeInsets.all(5),
-      child: MaterialButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("Odpowiedź"),
-                  content: getDialogContent(widget.question.answer),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(18),
-                  ),
-                  actions: [
-                    FlatButton(
-                        child: Text("Zamknij"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        })
-                  ],
-                );
-              });
-        },
-        minWidth: buttonWidth,
-        height: buttonHeight,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-            side: BorderSide(color: widget.color, width: 5)),
-        splashColor: widget.color,
-        child: Text(
-          "Odpowiedź",
-          style: TextStyle(fontSize: buttonTextSize),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
-  }
-
-  getDialogContent(Answer answer) {
-    var _imageName = answer.imageName;
-    if (answer.imageName == null) {
-      return Padding(
-        padding: EdgeInsets.all(10),
-        child: Text(answer.content),
-      );
-    } else {
-      return Center(
-        heightFactor: 1,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(7),
-              child: Row(
-                children: [
-                  Text(answer.content),
-                ],
-              ),
-            ),
-            CachedNetworkImage(
-              placeholder: (context, url) => CircularProgressIndicator(),
-              imageUrl:
-                  'https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/$_imageName?alt=media',
-              fit: BoxFit.cover,
-            )
-          ],
-        ),
-      );
-    }
-  }
-
-  getBackButton(double backWidth, double backHeight, double iconSize) {
-    return Padding(
-      padding: EdgeInsets.all(5),
-      child: MaterialButton(
-        onPressed: () {
-          Navigator.pop(context);
-          Navigator.pop(context);
-        },
-        shape: CircleBorder(),
-        child: Icon(
-          Icons.home,
-          color: Colors.white,
-          size: iconSize,
-        ),
-        splashColor: Colors.red,
-        color: widget.color,
-        padding: EdgeInsets.all(16),
       ),
     );
   }
