@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:wiewiorki_app/main.dart';
 import 'package:wiewiorki_app/models/Task.dart';
 
 import 'Categories.dart';
@@ -175,7 +176,7 @@ class _TaskScreenBodyState extends State<TaskScreenBody> {
               placeholder: (context, url) =>
                   Center(child: CircularProgressIndicator()),
               imageUrl:
-                  'https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/$_imageName?alt=media',
+                  MyApp.imageUrl + '$_imageName?alt=media',
               fit: BoxFit.scaleDown,
             ),
           ),

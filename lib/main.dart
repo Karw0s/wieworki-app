@@ -13,6 +13,7 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
+  static const String imageUrl = "https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/";
   @override
   _MyAppState createState() => _MyAppState();
 }
