@@ -50,18 +50,20 @@ class _QuestionScreenState extends State<QuestionScreen> {
   Widget build(BuildContext context) {
     // print(parentState.questions.where((element) => element.category == parentState.currentCategory).toList());
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Pytanie",
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: widget.color,
+      appBar: AppBar(
+        title: Text(
+          "Pytanie",
+          style: TextStyle(color: Colors.black),
         ),
-        body: new QuestionScreenBody(
-          outOfQuestions: isOutOfQuestions,
-          question: question,
-          color: widget.color,
-        ));
+        backgroundColor: widget.color,
+      ),
+      body: new QuestionScreenBody(
+        outOfQuestions: isOutOfQuestions,
+        question: question,
+        color: widget.color,
+      ),
+      bottomNavigationBar: getFooter(),
+    );
   }
 
   Question drawQuestion(CategoriesState parentState) {
@@ -203,8 +205,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
             child: CachedNetworkImage(
               placeholder: (context, url) =>
                   Center(child: CircularProgressIndicator()),
-              imageUrl:
-                  MyApp.imageUrl + '$_imageName?alt=media',
+              imageUrl: MyApp.imageUrl + '$_imageName?alt=media',
               fit: BoxFit.scaleDown,
             ),
           ),

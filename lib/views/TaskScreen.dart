@@ -48,18 +48,20 @@ class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Zadanie",
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: widget.color,
+      appBar: AppBar(
+        title: Text(
+          "Zadanie",
+          style: TextStyle(color: Colors.black),
         ),
-        body: new TaskScreenBody(
-          task: task,
-          outOfTasks: outOfTasks,
-          color: widget.color,
-        ));
+        backgroundColor: widget.color,
+      ),
+      body: new TaskScreenBody(
+        task: task,
+        outOfTasks: outOfTasks,
+        color: widget.color,
+      ),
+      bottomNavigationBar: getFooter(),
+    );
   }
 
   Task drawTask(List<Task> tasks) {
@@ -175,8 +177,7 @@ class _TaskScreenBodyState extends State<TaskScreenBody> {
             child: CachedNetworkImage(
               placeholder: (context, url) =>
                   Center(child: CircularProgressIndicator()),
-              imageUrl:
-                  MyApp.imageUrl + '$_imageName?alt=media',
+              imageUrl: MyApp.imageUrl + '$_imageName?alt=media',
               fit: BoxFit.scaleDown,
             ),
           ),

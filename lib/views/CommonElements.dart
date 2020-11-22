@@ -129,8 +129,7 @@ getDialogContent(Answer answer) {
           ),
           CachedNetworkImage(
             placeholder: (context, url) => CircularProgressIndicator(),
-            imageUrl:
-                MyApp.imageUrl + '$_imageName?alt=media',
+            imageUrl: MyApp.imageUrl + '$_imageName?alt=media',
             fit: BoxFit.cover,
           )
         ],
@@ -157,6 +156,24 @@ createBackButton(double backWidth, double backHeight, double iconSize,
       splashColor: Colors.red,
       color: color,
       padding: EdgeInsets.all(16),
+    ),
+  );
+}
+
+getFooter() {
+  return BottomAppBar(
+    child: Container(
+      color: Colors.transparent,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.copyright_sharp,
+            size: 14,
+          ),
+          Text("2020 Created by Michał Karwowski")
+        ],
+      ),
     ),
   );
 }

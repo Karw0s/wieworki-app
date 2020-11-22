@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:wiewiorki_app/models/Task.dart';
 import 'package:wiewiorki_app/views/Categories.dart';
+import 'package:wiewiorki_app/views/CommonElements.dart';
 
 import 'models/Question.dart';
 
@@ -13,7 +14,9 @@ void main() {
 }
 
 class MyApp extends StatefulWidget {
-  static const String imageUrl = "https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/";
+  static const String imageUrl =
+      "https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/";
+
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -46,21 +49,7 @@ class _MyAppState extends State<MyApp> {
                 : Center(child: CircularProgressIndicator());
           },
         ),
-        bottomNavigationBar: BottomAppBar(
-          child: Container(
-            color: Colors.transparent,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.copyright_sharp,
-                  size: 14,
-                ),
-                Text("2020 Created by Michał Karwowski")
-              ],
-            ),
-          ),
-        ),
+        bottomNavigationBar: getFooter(),
       ),
     );
   }

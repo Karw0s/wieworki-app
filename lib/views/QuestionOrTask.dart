@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wiewiorki_app/views/CommonElements.dart';
 
 import 'QuestionScreen.dart';
 import 'Categories.dart';
@@ -16,14 +17,16 @@ class QuestionOrTaskView extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            appearance.title,
-            style: TextStyle(color: Colors.black),
-          ),
-          backgroundColor: appearance.color,
+      appBar: AppBar(
+        title: Text(
+          appearance.title,
+          style: TextStyle(color: Colors.black),
         ),
-        body: Center(child: getButtons(context, width)));
+        backgroundColor: appearance.color,
+      ),
+      body: Center(child: getButtons(context, width)),
+      bottomNavigationBar: getFooter(),
+    );
   }
 
   getButtons(BuildContext context, double width) {
