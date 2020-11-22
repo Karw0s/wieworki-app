@@ -16,9 +16,10 @@
       "content": "Pytenie drugie, które jest o szczepie",
       "hint": "Podpowiedź do pytania drugiego",
       "category": "SZCZEP",
+      "imageName": null,
       "answer": {
         "type": "WITH_IMAGE",
-        "imageName": "jezyk.jpg",
+        "imageName": "jez.jpeg",
         "content": "Odpowiedź znajdziesz na zdjęciu"
       }
     },
@@ -27,9 +28,10 @@
       "content": "Kto jest komendantem hufca?",
       "hint": "Odpowiedź możesz znaleść na stronie www.pragapolnoc.zhp.pl",
       "category": "HUFIEC",
+      "imageName": "przystojny-romek.jpg",
       "answer": {
         "type": "WITH_IMAGE",
-        "imageName": "przystojny_romek.jpg",
+        "imageName": "przystojny-romek.jpg",
         "content": "phm. Bartosz Romaniuk"
       }
     },
@@ -47,7 +49,7 @@
     {
       "id": 4,
       "content": "Najwspanialszy druh",
-      "hint": "Już go niestety nie ma",
+      "hint": "Były drużynowy Bukowiny",
       "category": "GROMADA",
       "answer": {
         "type": "SIMPLE",
@@ -63,7 +65,19 @@
       "answer": {
         "type": "SIMPLE",
         "imageName": null,
-        "content": "Patek"
+        "content": "Pyzambik"
+      }
+    },
+    {
+      "id": 6,
+      "content": "Jak nazywa się ta wspaniała druhna?",
+      "hint": "Jej imię zaczyna się na literę M.",
+      "category": "GROMADA",
+      "imageName": "martyna.jpg",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Marti! :)"
       }
     }
   ],
@@ -84,7 +98,28 @@
       "id": 2,
       "content": "Treść zadania 3",
       "hint": "Podpowiedź do zadania 4",
+      "imageName": "przystojny-romek.jpg",
       "category": "HUFIEC"
+    },
+    {
+      "id": 5,
+      "content": "Zadanie ze zdjęciem bez odpowiedzi",
+      "hint": "Podpowiedź do zadania 4",
+      "imageName": "przystojny-romek.jpg",
+      "category": "HUFIEC",
+      "answer": null
+    },
+    {
+      "id": 6,
+      "content": "Zadanie ze zdjeciem z odpowiedzia",
+      "hint": "Podpowiedź do zadania 4",
+      "imageName": "przystojny-romek.jpg",
+      "category": "HUFIEC",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "odpowiedź bez zdjecia."
+      }
     },
     {
       "id": 3,

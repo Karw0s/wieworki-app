@@ -74,7 +74,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
         .toList();
     if (questionsAvailable.isEmpty) {
       isOutOfQuestions = true;
-      print(isOutOfQuestions);
       questionsAvailable = questionsInCategory;
     }
     return questionsAvailable.elementAt(rnd.nextInt(questionsAvailable.length));
@@ -120,16 +119,25 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return
+        // SingleChildScrollView(
+        // child:
+        // Stack(
+        //   children: [
+        Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: getButtonsLayout(context, question),
       ),
+      // ),
+      // ],
+      // ),
     );
   }
 
   getButtonsLayout(BuildContext context, Question question) {
     var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
     double buttonTextSize;
     double buttonWidth;
     double buttonHeight;
@@ -144,13 +152,9 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       backWidth = 88.0;
       backHeight = 36;
 
-      content.add(Text(
-        question.content,
-        style: TextStyle(fontSize: 36),
-        textAlign: TextAlign.center,
-      ));
-      content.add(getAnswerButton(buttonWidth, buttonHeight, buttonTextSize));
+      content.add(getQuestionContent(question, 30, screenHeight));
       content.add(getHintButton(buttonWidth, buttonHeight, buttonTextSize));
+      content.add(getAnswerButton(buttonWidth, buttonHeight, buttonTextSize));
       content.add(getBackButton(backWidth, backHeight, 32));
     } else {
       buttonTextSize = 26;
@@ -159,11 +163,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       backWidth = 100.0;
       backHeight = 75;
 
-      content.add(Text(
-        question.content,
-        style: TextStyle(fontSize: 42),
-        textAlign: TextAlign.center,
-      ));
+      content.add(getQuestionContent(question, 42, screenHeight));
       content.add(Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
@@ -176,79 +176,128 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
     return content;
   }
 
+  getQuestionContent(Question question, double textSize, double screenHeight) {
+    if (question.imageName == null) {
+      return Padding(
+        padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+        child: Text(
+          question.content,
+          style: TextStyle(fontSize: textSize),
+          textAlign: TextAlign.center,
+        ),
+      );
+    } else {
+      var _imageName = question.imageName;
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 10),
+            child: Text(
+              question.content,
+              style: TextStyle(fontSize: textSize),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          Container(
+            height: screenHeight / 2 - 50,
+            child: CachedNetworkImage(
+              placeholder: (context, url) =>
+                  Center(child: CircularProgressIndicator()),
+              imageUrl:
+                  'https://firebasestorage.googleapis.com/v0/b/wiewiorki-f1db5.appspot.com/o/$_imageName?alt=media',
+              fit: BoxFit.scaleDown,
+            ),
+          ),
+        ],
+      );
+    }
+  }
+
   getHintButton(
       double buttonWidth, double buttonHeight, double buttonTextSize) {
-    return MaterialButton(
-      onPressed: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Podpowiedź"),
-                content: Text(question.hint),
-                actions: [
-                  FlatButton(
-                      child: Text("Zamknij"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      })
-                ],
-              );
-            });
-      },
-      minWidth: buttonWidth,
-      height: buttonHeight,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-          side: BorderSide(color: widget.color, width: 5)),
-      splashColor: widget.color,
-      child: Text(
-        "Podpowiedź",
-        style: TextStyle(fontSize: buttonTextSize),
-        textAlign: TextAlign.center,
+    return Padding(
+      padding: EdgeInsets.all(5),
+      child: MaterialButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Podpowiedź"),
+                  content: Text(question.hint),
+                  actions: [
+                    FlatButton(
+                        child: Text("Zamknij"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        })
+                  ],
+                );
+              });
+        },
+        minWidth: buttonWidth,
+        height: buttonHeight,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            side: BorderSide(color: widget.color, width: 5)),
+        splashColor: widget.color,
+        child: Text(
+          "Podpowiedź",
+          style: TextStyle(fontSize: buttonTextSize),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
 
   getAnswerButton(
       double buttonWidth, double buttonHeight, double buttonTextSize) {
-    return MaterialButton(
-      onPressed: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text("Odpowiedź"),
-                content: getDialogContent(widget.question.answer),
-                actions: [
-                  FlatButton(
-                      child: Text("Zamknij"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      })
-                ],
-              );
-            });
-      },
-      minWidth: buttonWidth,
-      height: buttonHeight,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(18),
-          side: BorderSide(color: widget.color, width: 5)),
-      splashColor: widget.color,
-      child: Text(
-        "Odpowiedź",
-        style: TextStyle(fontSize: buttonTextSize),
-        textAlign: TextAlign.center,
+    return Padding(
+      padding: EdgeInsets.all(5),
+      child: MaterialButton(
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                return AlertDialog(
+                  title: Text("Odpowiedź"),
+                  content: getDialogContent(widget.question.answer),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(18),
+                  ),
+                  actions: [
+                    FlatButton(
+                        child: Text("Zamknij"),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        })
+                  ],
+                );
+              });
+        },
+        minWidth: buttonWidth,
+        height: buttonHeight,
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(18),
+            side: BorderSide(color: widget.color, width: 5)),
+        splashColor: widget.color,
+        child: Text(
+          "Odpowiedź",
+          style: TextStyle(fontSize: buttonTextSize),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
 
   getDialogContent(Answer answer) {
-    print(answer);
     var _imageName = answer.imageName;
     if (answer.imageName == null) {
-      return Text(answer.content);
+      return Padding(
+        padding: EdgeInsets.all(10),
+        child: Text(answer.content),
+      );
     } else {
       return Center(
         heightFactor: 1,
@@ -256,13 +305,13 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              children: [
-                Text(answer.content),
-              ],
-            ),
-            Row(
-              children: [Text("")],
+            Padding(
+              padding: EdgeInsets.all(7),
+              child: Row(
+                children: [
+                  Text(answer.content),
+                ],
+              ),
             ),
             CachedNetworkImage(
               placeholder: (context, url) => CircularProgressIndicator(),
@@ -277,20 +326,23 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
   }
 
   getBackButton(double backWidth, double backHeight, double iconSize) {
-    return MaterialButton(
-      onPressed: () {
-        Navigator.pop(context);
-        Navigator.pop(context);
-      },
-      shape: CircleBorder(),
-      child: Icon(
-        Icons.home,
-        color: Colors.white,
-        size: iconSize,
+    return Padding(
+      padding: EdgeInsets.all(5),
+      child: MaterialButton(
+        onPressed: () {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        },
+        shape: CircleBorder(),
+        child: Icon(
+          Icons.home,
+          color: Colors.white,
+          size: iconSize,
+        ),
+        splashColor: Colors.red,
+        color: widget.color,
+        padding: EdgeInsets.all(16),
       ),
-      splashColor: Colors.red,
-      color: widget.color,
-      padding: EdgeInsets.all(16),
     );
   }
 }
