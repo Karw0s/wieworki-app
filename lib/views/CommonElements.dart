@@ -143,12 +143,8 @@ getDialogContent(String text, String imageName) {
         children: [
           Padding(
             padding: EdgeInsets.all(7),
-            child: Row(
-              children: [
-                Linkable(
-                  text: text,
-                ),
-              ],
+            child: Linkable(
+              text: text,
             ),
           ),
           CachedNetworkImage(
