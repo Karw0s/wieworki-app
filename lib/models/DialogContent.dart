@@ -1,18 +1,18 @@
-class Answer {
-  AnswerType type;
+class DialogContent {
+  DialogType type;
   String imageName;
   String content;
 
-  Answer({this.type, this.imageName, this.content});
+  DialogContent({this.type, this.imageName, this.content});
 
-  Answer.fromJson(Map<String, dynamic> json)
+  DialogContent.fromJson(Map<String, dynamic> json)
       : type = getTypeFromString(json["type"]),
         content = json["content"],
         imageName = json["imageName"];
 }
 
 getTypeFromString(String t) {
-  for (AnswerType type in AnswerType.values) {
+  for (DialogType type in DialogType.values) {
     if (type.toString() == t) {
       return type;
     }
@@ -20,4 +20,4 @@ getTypeFromString(String t) {
   return null;
 }
 
-enum AnswerType { SIMPLE, WITH_IMAGE }
+enum DialogType { SIMPLE, WITH_IMAGE }

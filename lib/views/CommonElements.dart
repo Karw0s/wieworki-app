@@ -1,10 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:linkable/linkable.dart';
 import 'package:wiewiorki_app/main.dart';
-import 'package:wiewiorki_app/models/Answer.dart';
+import 'package:wiewiorki_app/models/DialogContent.dart';
 
 class CommonButtonCreator {
-  getAnswerButton(BuildContext context, Color color, Answer answer) {}
+  getAnswerButton(BuildContext context, Color color, DialogContent answer) {}
+
+  getHintButton(BuildContext context, Color color, DialogContent hint) {}
 
   getBackButton(BuildContext context, Color color) {}
 
@@ -21,9 +24,15 @@ class SmallScreenButtons implements CommonButtonCreator {
   static const double TEXT_SIZE = 30;
 
   @override
-  getAnswerButton(BuildContext context, Color color, Answer answer) {
-    return createAnswerButton(
-        BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_TEXT_SIZE, answer, color, context);
+  getAnswerButton(BuildContext context, Color color, DialogContent answer) {
+    return createDialogButton(BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_TEXT_SIZE,
+        "Odpowiedź", answer, color, context);
+  }
+
+  @override
+  getHintButton(BuildContext context, Color color, DialogContent hint) {
+    return createDialogButton(BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_TEXT_SIZE,
+        "Podpowiedź", hint, color, context);
   }
 
   @override
@@ -48,9 +57,15 @@ class BigScreenButtons implements CommonButtonCreator {
   static const double TEXT_SIZE = 42;
 
   @override
-  getAnswerButton(BuildContext context, Color color, Answer answer) {
-    return createAnswerButton(
-        BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_TEXT_SIZE, answer, color, context);
+  getAnswerButton(BuildContext context, Color color, DialogContent answer) {
+    return createDialogButton(BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_TEXT_SIZE,
+        "Odpowiedź", answer, color, context);
+  }
+
+  @override
+  getHintButton(BuildContext context, Color color, DialogContent hint) {
+    return createDialogButton(BUTTON_WIDTH, BUTTON_HEIGHT, BUTTON_TEXT_SIZE,
+        "Podpowiedź", hint, color, context);
   }
 
   @override
@@ -65,8 +80,14 @@ class BigScreenButtons implements CommonButtonCreator {
   }
 }
 
-createAnswerButton(double buttonWidth, double buttonHeight,
-    double buttonTextSize, Answer answer, Color color, BuildContext context) {
+createDialogButton(
+    double buttonWidth,
+    double buttonHeight,
+    double buttonTextSize,
+    String title,
+    DialogContent answer,
+    Color color,
+    BuildContext context) {
   return Padding(
     padding: EdgeInsets.all(5),
     child: MaterialButton(
@@ -75,8 +96,8 @@ createAnswerButton(double buttonWidth, double buttonHeight,
             context: context,
             builder: (BuildContext context) {
               return AlertDialog(
-                title: Text("Odpowiedź"),
-                content: getDialogContent(answer),
+                title: Text(title),
+                content: getDialogContent(answer.content, answer.imageName),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),
@@ -97,7 +118,7 @@ createAnswerButton(double buttonWidth, double buttonHeight,
           side: BorderSide(color: color, width: 5)),
       splashColor: color,
       child: Text(
-        "Odpowiedź",
+        title,
         style: TextStyle(fontSize: buttonTextSize),
         textAlign: TextAlign.center,
       ),
@@ -105,12 +126,13 @@ createAnswerButton(double buttonWidth, double buttonHeight,
   );
 }
 
-getDialogContent(Answer answer) {
-  var _imageName = answer.imageName;
-  if (answer.imageName == null) {
+getDialogContent(String text, String imageName) {
+  if (imageName == null) {
     return Padding(
       padding: EdgeInsets.all(10),
-      child: Text(answer.content),
+      child: Linkable(
+        text: text,
+      ),
     );
   } else {
     return Center(
@@ -123,13 +145,15 @@ getDialogContent(Answer answer) {
             padding: EdgeInsets.all(7),
             child: Row(
               children: [
-                Text(answer.content),
+                Linkable(
+                  text: text,
+                ),
               ],
             ),
           ),
           CachedNetworkImage(
             placeholder: (context, url) => CircularProgressIndicator(),
-            imageUrl: MyApp.imageUrl + '$_imageName?alt=media',
+            imageUrl: MyApp.imageUrl + '$imageName?alt=media',
             fit: BoxFit.cover,
           )
         ],

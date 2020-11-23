@@ -148,10 +148,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
       commonButtons = SmallScreenButtons();
       content.add(getQuestionContent(
           question, commonButtons.getTextSize(), screenHeight));
-      content.add(getHintButton(
-          SmallScreenButtons.BUTTON_WIDTH,
-          SmallScreenButtons.BUTTON_HEIGHT,
-          SmallScreenButtons.BUTTON_TEXT_SIZE));
+      content.add(commonButtons.getHintButton(context, widget.color, question.hint));
       content.add(commonButtons.getAnswerButton(
           context, widget.color, question.answer));
       content.add(commonButtons.getBackButton(context, widget.color));
@@ -163,10 +160,7 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            getHintButton(
-                BigScreenButtons.BUTTON_WIDTH,
-                BigScreenButtons.BUTTON_HEIGHT,
-                BigScreenButtons.BUTTON_TEXT_SIZE),
+            commonButtons.getHintButton(context, widget.color, question.hint),
             commonButtons.getAnswerButton(
                 context, widget.color, question.answer)
           ],
@@ -212,42 +206,5 @@ class _QuestionScreenBodyState extends State<QuestionScreenBody> {
         ],
       );
     }
-  }
-
-  getHintButton(
-      double buttonWidth, double buttonHeight, double buttonTextSize) {
-    return Padding(
-      padding: EdgeInsets.all(5),
-      child: MaterialButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text("Podpowiedź"),
-                  content: Text(question.hint),
-                  actions: [
-                    FlatButton(
-                        child: Text("Zamknij"),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        })
-                  ],
-                );
-              });
-        },
-        minWidth: buttonWidth,
-        height: buttonHeight,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-            side: BorderSide(color: widget.color, width: 5)),
-        splashColor: widget.color,
-        child: Text(
-          "Podpowiedź",
-          style: TextStyle(fontSize: buttonTextSize),
-          textAlign: TextAlign.center,
-        ),
-      ),
-    );
   }
 }

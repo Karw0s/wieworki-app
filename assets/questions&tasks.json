@@ -2,33 +2,88 @@
   "questions": [
     {
       "id": 0,
-      "content": "Treść pytania drugiego o Gromadę",
-      "hint": "Podpowiedź do pytania pierwszego",
-      "category": "GROMADA",
+      "content": "Co oznacza granatowy sznur?",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Nosi taki dh. Gosia"
+      },
+      "category": "ZHP",
       "answer": {
         "type": "SIMPLE",
         "imageName": null,
-        "content": "Odpowiedź pytanie pierwsze"
+        "content": "Granatowy sznur oznacza drużynowego."
       }
     },
     {
       "id": 1,
-      "content": "Pytenie drugie, które jest o szczepie",
-      "hint": "Podpowiedź do pytania drugiego",
-      "category": "SZCZEP",
-      "imageName": null,
+      "content": "Co oznacza zielony sznur?",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Nosi taki dh. Patrycja"
+      },
+      "category": "ZHP",
       "answer": {
-        "type": "WITH_IMAGE",
-        "imageName": "jez.jpeg",
-        "content": "Odpowiedź znajdziesz na zdjęciu"
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Zielony sznur oznacza przyboczną."
       }
     },
     {
       "id": 2,
-      "content": "Kto jest komendantem hufca?",
-      "hint": "Odpowiedź możesz znaleść na stronie www.pragapolnoc.zhp.pl",
+      "content": "Kto jest bohaterem naszego hufca?",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Sprawdź na stronie: www.pragapolnoc.zhp.pl/bohater-hufca"
+      },
       "category": "HUFIEC",
-      "imageName": "przystojny-romek.jpg",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Wigierczycy"
+      }
+    },
+    {
+      "id": 3,
+      "content": "Jakiego koloru są berety noszone przez komendę naszego szczepu?",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Przypomnij sobie beret dh. Michała."
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Berety te są zielone"
+      }
+    },
+    {
+      "id": 4,
+      "content": "Jakiego koloru berety noszą harcerze z naszego szczepu?",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Możesz poszukać na fanpage naszego szczepu"
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Berety te są czarne."
+      }
+    },
+    {
+      "id": 6,
+      "content": "Kto jest komendantem hufca?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "przystojny-romek.jpg",
+        "content": "Odpowiedź możesz znaleść na stronie www.pragapolnoc.zhp.pl"
+      },
+      "category": "HUFIEC",
       "answer": {
         "type": "WITH_IMAGE",
         "imageName": "przystojny-romek.jpg",
@@ -36,102 +91,98 @@
       }
     },
     {
-      "id": 3,
+      "id": 7,
+      "content": "Jak nazywa się dzik, który niszczy zapasy wiewiórek?",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Jego imię zaczyna się na literę B."
+      },
+      "category": "GROMADA",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Dzik ma na imię Bernard."
+      }
+    },
+    {
+      "id": 8,
       "content": "Co oznacza skrót ZHP?",
-      "hint": "poszukaj w Google",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "poszukaj w Google"
+      },
       "category": "ZHP",
       "answer": {
         "type": "SIMPLE",
         "imageName": null,
         "content": "Związek Harcerstwa Polskiego"
       }
-    },
-    {
-      "id": 4,
-      "content": "Najwspanialszy druh",
-      "hint": "Były drużynowy Bukowiny",
-      "category": "GROMADA",
-      "answer": {
-        "type": "SIMPLE",
-        "imageName": null,
-        "content": "Michaś"
-      }
-    },
-    {
-      "id": 5,
-      "content": "Najwspanialsza druhna?",
-      "hint": "Jej imię zaczyna się na literę P.",
-      "category": "GROMADA",
-      "answer": {
-        "type": "SIMPLE",
-        "imageName": null,
-        "content": "Patka"
-      }
-    },
-    {
-      "id": 6,
-      "content": "Jak nazywa się ta wspaniała druhna?",
-      "hint": "Jej imię zaczyna się na literę M.",
-      "category": "GROMADA",
-      "imageName": "martyna.jpg",
-      "answer": {
-        "type": "SIMPLE",
-        "imageName": null,
-        "content": "Marti! :)"
-      }
     }
   ],
   "tasks": [
     {
       "id": 0,
-      "content": "Treść zadania 1",
-      "hint": "Podpowiedź do zadania 1",
-      "category": "GROMADA"
+      "content": "Wymień imiona osób kadry.",
+      "hint": null,
+      "category": "GROMADA",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Marti, Patka, Gocha, Karol, Kuba"
+      }
     },
     {
       "id": 1,
-      "content": "Treść zadania 2",
-      "hint": "Podpowiedź do zadania 2",
-      "category": "SZCZEP"
+      "content": "Podrzuć orzech/żołądź/kasztan 7 i 2 razy",
+      "hint": null,
+      "category": "GROMADA",
+      "answer": null
     },
     {
       "id": 2,
-      "content": "Treść zadania 3",
-      "hint": "Podpowiedź do zadania 4",
-      "imageName": "przystojny-romek.jpg",
-      "category": "HUFIEC"
-    },
-    {
-      "id": 5,
-      "content": "Zadanie ze zdjęciem bez odpowiedzi",
-      "hint": "Podpowiedź do zadania 4",
-      "imageName": "przystojny-romek.jpg",
+      "content": "Popatrz na logo naszego hufca (znajduje się w podpowiedzi) przez 10 seksund. Następnie zawiąż oczy i postaraj się narysować logo z pamięci.",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "logo_hufca_fb.jpg",
+        "content": "Tylko 10 sekund! Czas start!"
+      },
       "category": "HUFIEC",
       "answer": null
     },
     {
-      "id": 6,
-      "content": "Zadanie ze zdjeciem z odpowiedzia",
-      "hint": "Podpowiedź do zadania 4",
-      "imageName": "przystojny-romek.jpg",
-      "category": "HUFIEC",
-      "answer": {
+      "id": 3,
+      "content": "Pokaż uczestnikom gry, z której strony powinno się nosić sznur oznaczający funkcję w gromadzie",
+      "hint": {
         "type": "SIMPLE",
         "imageName": null,
-        "content": "odpowiedź bez zdjecia."
-      }
-    },
-    {
-      "id": 3,
-      "content": "Treść zadania 4",
-      "hint": "Podpowiedź do zadania 4",
-      "category": "ZHP"
+        "content": "Sznur powinno się nosić po tej stronie, z której jest serce."
+      },
+      "category": "ZHP",
+      "answer": null
     },
     {
       "id": 4,
-      "content": "Treść zadania 5",
-      "hint": "Podpowiedź do zadania 5",
-      "category": "GROMADA"
+      "content": "Zapal świeczkę jedną zapałką.",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Pamiętaj o odpowiednim trzymaniu zapałki."
+      },
+      "category": "GROMADA",
+      "answer": null
+    },
+    {
+      "id": 5,
+      "content": "Zgaś świeczkę paluszkami.",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Dasz radę! :)"
+      },
+      "category": "GROMADA",
+      "answer": null
     }
   ]
 }

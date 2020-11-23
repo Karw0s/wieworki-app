@@ -131,19 +131,34 @@ class _TaskScreenBodyState extends State<TaskScreenBody> {
     var screenHeight = MediaQuery.of(context).size.height;
 
     if (screenWidth < 800) {
-      return getScreenLayout(SmallScreenButtons(), screenHeight);
+      return getScreenLayout(SmallScreenButtons(), screenHeight, true);
     } else {
-      return getScreenLayout(BigScreenButtons(), screenHeight);
+      return getScreenLayout(BigScreenButtons(), screenHeight, false);
     }
   }
 
-  getScreenLayout(CommonButtonCreator buttonCreator, double screenHeight) {
+  getScreenLayout(CommonButtonCreator buttonCreator, double screenHeight,
+      bool smallScreen) {
     List<Widget> content = List();
     content
         .add(getTaskContent(task, buttonCreator.getTextSize(), screenHeight));
-    if (task.answer != null) {
-      content.add(
-          buttonCreator.getAnswerButton(context, widget.color, task.answer));
+    if (task.answer != null && task.hint != null && !smallScreen) {
+      content.add(Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          buttonCreator.getHintButton(context, widget.color, task.hint),
+          buttonCreator.getAnswerButton(context, widget.color, task.answer),
+        ],
+      ));
+    } else {
+      if (task.hint != null) {
+        content
+            .add(buttonCreator.getHintButton(context, widget.color, task.hint));
+      }
+      if (task.answer != null) {
+        content.add(
+            buttonCreator.getAnswerButton(context, widget.color, task.answer));
+      }
     }
     content.add(buttonCreator.getBackButton(context, widget.color));
     return content;
