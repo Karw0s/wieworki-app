@@ -130,29 +130,27 @@ getDialogContent(String text, String imageName) {
   if (imageName == null) {
     return Padding(
       padding: EdgeInsets.all(10),
-      child: Linkable(
-        text: text,
-      ),
+      child: Linkable(text: text),
     );
   } else {
+    List<Widget> content = new List();
+    if (text != null) {
+      content.add(Padding(
+        padding: EdgeInsets.all(7),
+        child: Linkable(text: text),
+      ));
+    }
+    content.add(CachedNetworkImage(
+      placeholder: (context, url) => CircularProgressIndicator(),
+      imageUrl: MyApp.imageUrl + '$imageName?alt=media',
+      fit: BoxFit.fitHeight,
+    ));
     return Center(
       heightFactor: 1,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.min,
-        children: [
-          Padding(
-            padding: EdgeInsets.all(7),
-            child: Linkable(
-              text: text,
-            ),
-          ),
-          CachedNetworkImage(
-            placeholder: (context, url) => CircularProgressIndicator(),
-            imageUrl: MyApp.imageUrl + '$imageName?alt=media',
-            fit: BoxFit.cover,
-          )
-        ],
+        children: content,
       ),
     );
   }

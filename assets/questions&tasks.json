@@ -17,6 +17,160 @@
     },
     {
       "id": 1,
+      "content": "Jak nazywa się król Wiewiórczego Lasu?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "bazyl.jpg",
+        "content": null
+      },
+      "category": "GROMADA",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "Bazyl"
+      }
+    },
+    {
+      "id": 2,
+      "content": "Jak nazywa się nasza gromada?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "wgz ws.jpg",
+        "content": null
+      },
+      "category": "GROMADA",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "72 WGZ Wiewiórczy Szlak"
+      }
+    },
+    {
+      "id": 3,
+      "content": "Jaki jest numer naszego szczepu?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "ostojka.png",
+        "content": null
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "Ostoja."
+      }
+    },
+    {
+      "id": 4,
+      "content": "Jaki jest numer naszego szczepu?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "znaczek72.png",
+        "content": null
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "72"
+      }
+    },
+    {
+      "id": 5,
+      "content": "Jak nazywa się komendantka naszego szczepu?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "martyna.jpeg",
+        "content": null
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "pwd. Martyna Morawska."
+      }
+    },
+    {
+      "id": 6,
+      "content": "Jakie chusty noszą harcerze w naszym szczepie?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "harcerki.jpg",
+        "content": null
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "Harcerze noszą czarno-zielone chusty."
+      }
+    },
+    {
+      "id": 7,
+      "content": "Jak nazywa się druga gromada zuchowa w naszym szczepie?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "gawra.jpg",
+        "content": null
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "72 WGZ Niedźwiedzia Gawra."
+      }
+    },
+    {
+      "id": 8,
+      "content": "Jak nazywa się drużyna harcerska, do której przechodzą zuchy z naszej gromady?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "knieja.jpg",
+        "content": "Drużyna ta ma bobra na swojej plakietce."
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "72 WDH Knieja im. Kompanii Maciek."
+      }
+    },
+    {
+      "id": 9,
+      "content": "Jakie zwierze widnieje na plakietce Bukowiny?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "bukowina.jpg",
+        "content": null
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "Zwierzęciem na plakietce Bukowiny jest borsuk."
+      }
+    },
+    {
+      "id": 10,
+      "content": "Co to jest latryna?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "latryny.jpg",
+        "content": null
+      },
+      "category": "ZHP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "Latryna jest to rodzaj toalety. "
+      }
+    },
+    {
+      "id": 11,
+      "content": "Do czego służy saperka?",
+      "hint": {
+        "type": "WITH_IMAGE",
+        "imageName": "saperka.jpg",
+        "content": null
+      },
+      "category": "ZHP",
+      "answer": {
+        "type": "SIMPLE",
+        "content": "Saperka to składana łopatka, która jest jednym z wyposażenia biwaku. Może mieć ona wiele zastosowań - od kopania dołków do zakopywania odchodów."
+      }
+    },
+    {
+      "id": 11,
       "content": "Co oznacza zielony sznur?",
       "hint": {
         "type": "SIMPLE",
@@ -31,7 +185,7 @@
       }
     },
     {
-      "id": 2,
+      "id": 12,
       "content": "Kto jest bohaterem naszego hufca?",
       "hint": {
         "type": "SIMPLE",
@@ -46,7 +200,7 @@
       }
     },
     {
-      "id": 3,
+      "id": 13,
       "content": "Jakiego koloru są berety noszone przez komendę naszego szczepu?",
       "hint": {
         "type": "SIMPLE",
@@ -61,7 +215,7 @@
       }
     },
     {
-      "id": 4,
+      "id": 14,
       "content": "Jakiego koloru berety noszą harcerze z naszego szczepu?",
       "hint": {
         "type": "SIMPLE",
@@ -76,7 +230,7 @@
       }
     },
     {
-      "id": 6,
+      "id": 15,
       "content": "Kto jest komendantem hufca?",
       "hint": {
         "type": "WITH_IMAGE",
@@ -91,7 +245,7 @@
       }
     },
     {
-      "id": 7,
+      "id": 15,
       "content": "Jak nazywa się dzik, który niszczy zapasy wiewiórek?",
       "hint": {
         "type": "SIMPLE",
@@ -106,7 +260,7 @@
       }
     },
     {
-      "id": 8,
+      "id": 16,
       "content": "Co oznacza skrót ZHP?",
       "hint": {
         "type": "SIMPLE",
@@ -130,7 +284,7 @@
       "answer": {
         "type": "SIMPLE",
         "imageName": null,
-        "content": "Marti, Patka, Gocha, Karol, Kuba"
+        "content": "Martyna, Patka, Gocha, Karol, Kuba, Ania"
       }
     },
     {
@@ -183,6 +337,21 @@
       },
       "category": "GROMADA",
       "answer": null
+    },
+    {
+      "id": 6,
+      "content": "Wymień jak najwięcej zwierząt, które reprezentują drużyny w naszym szczepie",
+      "hint": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Dasz radę! :)"
+      },
+      "category": "SZCZEP",
+      "answer": {
+        "type": "SIMPLE",
+        "imageName": null,
+        "content": "Niedźwiedź, Wiewiórka, Borsuk, Bóbr, Lis"
+      }
     }
   ]
 }
